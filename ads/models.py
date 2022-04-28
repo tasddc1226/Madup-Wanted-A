@@ -8,6 +8,7 @@ class ad_info(TimeStamp):
     advertiser = models.ForeignKey(advertiser_info,max_length=100, on_delete=models.CASCADE)
     media = models.CharField(max_length=100)
     
+    
 
 class result_data_set(models.Model):
     advertiser = models.ForeignKey(advertiser_info,max_length=100, on_delete=models.CASCADE)
@@ -19,3 +20,10 @@ class result_data_set(models.Model):
     click = models.IntegerField()
     conversion = models.IntegerField()
     cv = models.IntegerField()
+    
+    class Meta:
+       indexes = [
+            models.Index(fields=['advertiser',]),
+            models.Index(fields=['media',]),
+            models.Index(fields=['date',]),
+       ]
