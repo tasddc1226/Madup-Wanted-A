@@ -2,6 +2,6 @@ from django.urls import path, include
 import advertisers.urls, ads.urls
 
 urlpatterns = [
-    path('', include(ads.urls)),
-    path('advertisers', include(advertisers.urls)),
+    path('api/v1/ads/', include(ads.urls)),
+    path('api/v1/advertisers/', include(advertisers.urls)),
 ]
