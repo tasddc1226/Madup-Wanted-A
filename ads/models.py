@@ -23,7 +23,6 @@ class result_data_set(models.Model):
     
     class Meta:
        indexes = [
-            models.Index(fields=['advertiser',]),
+            models.Index(fields=['advertiser','date']),
             models.Index(fields=['media',]),
-            models.Index(fields=['date',]),
        ]
