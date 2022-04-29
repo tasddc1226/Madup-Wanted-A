@@ -55,5 +55,5 @@ def analysis_detail(request):
         }
         analysis_datas_set[f'{kind}'] = analysis_datas
 
-    return JsonResponse({'message':'SUCCESS', 'analysis_datas': analysis_datas_set}, status=201)
+    return JsonResponse({'message':'SUCCESS', 'analysis_datas': analysis_datas_set}, status=200)
     
