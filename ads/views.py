@@ -2,26 +2,28 @@ from django.db.models import Sum
 from .models import result_data_set
 from advertisers.models import advertiser_info
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from datetime import datetime
+from django.http import JsonResponse
 
 # Create your views here.
-
-@api_view(['GET'])
 def analysis_detail(request):
 
+    # 조회할 광고주id의 존재여부 확인
     advertiser_id = request.GET.get('advertiser_id', None)
-    
-    # 광고주id의 존재여부, 입력일자의 에러 확인
-    date_format = '%Y.%M.%d'
-    try:
-        start_date = datetime.strptime(request.GET.get('start_date', None), date_format)
-        end_date = datetime.strptime(request.GET.get('end_date', None), date_format)
-    except TypeError:
-        return Response('일자입력형식은 "yyyy.mm.dd"입니다.', status=404)
     advertiser = advertiser_info.objects.filter(advertiser_id=advertiser_id).first()
     if not advertiser:
-        return Response(f'{advertiser_id}로 검색된 광고주가 없습니다.', status=404)
+        return JsonResponse({'message':f'{advertiser_id}로 검색된 광고주가 없습니다.'}, status=404)
+    
+    # 입력기간 예외 처리
+    try:
+        date_format = '%Y.%M.%d'
+        start_date = datetime.strptime(request.GET.get('start_date', None), date_format)
+        end_date = datetime.strptime(request.GET.get('end_date', None), date_format)
+    except:
+        return JsonResponse({'message':'조회 날짜가 비어있거나 입력 형식이 잘못되었습니다. 일자입력형식은 YYYY.MM.DD입니다.'}, status=404)
+
+    if start_date > end_date:
+        return JsonResponse({'message':'조회 시작 날짜보다 끝 날짜가 더 빠를 수 없습니다.'}, status=404)
 
     # 광고주id와 기간으로 검색
     datas = result_data_set.objects.filter(advertiser_id=advertiser_id, 
@@ -53,5 +55,5 @@ def analysis_detail(request):
         }
         analysis_datas_set[f'{kind}'] = analysis_datas
 
-    return Response(analysis_datas_set, status=200)
+    return JsonResponse({'message':'SUCCESS', 'analysis_datas': analysis_datas_set}, status=201)
     
