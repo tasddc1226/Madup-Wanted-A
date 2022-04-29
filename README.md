@@ -1,7 +1,7 @@
 ## 👩‍💻 Team
-- **[양수영](github.com/tasddc1226)**
-- **[권은경](github.com/fore0919)**
-- **[윤상민](github.com/redtea89)**
+- **[양수영](https://github.com/tasddc1226)**
+- **[권은경](https://github.com/fore0919)**
+- **[윤상민](https://github.com/redtea89)**
 
 `프로젝트 진행 기간 2022.04.26 09:00 ~ 2022.04.29 18:00`
 
