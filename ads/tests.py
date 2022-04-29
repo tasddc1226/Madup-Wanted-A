@@ -7,6 +7,7 @@ from datetime import datetime
 from ads.models import result_data_set, ad_info
 from advertisers.models import advertiser_info
 
+TestCase.maxDiff = None
 # 양수영
 # 광고 효율 데이터 테스트
 class GetAdsResultTest(TestCase):
@@ -29,7 +30,7 @@ class GetAdsResultTest(TestCase):
             media = 'naver',
             date = datetime.strptime('2022.01.01','%Y.%M.%d'),
             cost = '49900',
-            impression = '244',
+            impression = 244,
             click = '47',
             conversion = '0',
             cv = '0'
@@ -41,7 +42,7 @@ class GetAdsResultTest(TestCase):
             media = 'naver',
             date = datetime.strptime('2022.01.02', '%Y.%M.%d'),
             cost = '49900',
-            impression = '434',
+            impression = 434,
             click = '68',
             conversion = '4',
             cv = '162800'

@@ -15,7 +15,7 @@ class result_data_set(models.Model):
     advertiser = models.ForeignKey(advertiser_info,max_length=100, on_delete=models.CASCADE)
     uid = models.ForeignKey(ad_info ,max_length=100, on_delete=models.CASCADE)
     media = models.CharField(max_length=100)
-    date = models.DateTimeField()
+    date = models.DateField()
     cost = models.PositiveIntegerField(default=0)
     impression = models.IntegerField(default=0)
     click = models.PositiveIntegerField(default=0)
