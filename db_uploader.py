@@ -44,8 +44,9 @@ with open(CSV_PATH_ADS_result_data_set) as in_file:
         media = row[2]
         ##date 포멧변경
         date = row[3]
-        date_format = '%Y.%M.%d'
+        date_format = '%Y.%m.%d'
         date = datetime.strptime(date, date_format)
+        date = date.date()
         ###
         cost = row[4]
         impression = row[5]
@@ -57,7 +58,3 @@ with open(CSV_PATH_ADS_result_data_set) as in_file:
             cost = cost, impression = impression, click = click, conversion = conversion, cv = cv)
         except:
             print("입력실패")
-
-    
-a = 'ok'
-
