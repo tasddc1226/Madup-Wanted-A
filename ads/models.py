@@ -11,7 +11,7 @@ class ad_info(TimeStamp):
     
 
 class result_data_set(models.Model):
-    id = models.AutoField(primary_key=True)
+    auto_id = models.AutoField(primary_key=True)
     advertiser = models.ForeignKey(advertiser_info,max_length=100, on_delete=models.CASCADE)
     uid = models.ForeignKey(ad_info ,max_length=100, on_delete=models.CASCADE)
     media = models.CharField(max_length=100)
