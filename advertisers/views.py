@@ -1,6 +1,6 @@
 import json
 
-from django.http      import JsonResponse, request
+from django.http      import JsonResponse
 from django.views     import View
 
 from advertisers.models import advertiser_info
