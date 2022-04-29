@@ -4,7 +4,7 @@ from django.http      import JsonResponse, request
 from django.views     import View
 
 from advertisers.models import advertiser_info
-from .utils  import validate_email, validate_phone
+from .utils  import validate_email, validate_phone, validate_id
 
 # 권은경
 class AdvertiserSignIn(View):
@@ -16,12 +16,18 @@ class AdvertiserSignIn(View):
             email = data['email']
             phone = data['phone']
 
-            if not validate_email(email) :
+            if not validate_id(advertiser_id):
+                return JsonResponse({'message':'USER_ID_VALIDATION_ERROR'}, status=400)
+                
+            if not validate_email(email):
                 return JsonResponse({'message':'EMAIL_VALIDATION_ERROR'}, status=400)
             
-            if not validate_phone(phone) :
+            if not validate_phone(phone):
                 return JsonResponse({'message':'PHONE_NUMBER_VALIDATION_ERROR'}, status=400)
-            
+
+            if advertiser_info.objects.filter(advertiser_id=advertiser_id).exists():
+                return JsonResponse({'message':'ALREADY_EXISTS_ID'}, status=409)
+    
             if advertiser_info.objects.filter(email=email).exists():
                 return JsonResponse({'message':'ALREADY_EXISTS_EMAIL'}, status=409)
 
