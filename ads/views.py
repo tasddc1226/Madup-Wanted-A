@@ -1,7 +1,7 @@
 from django.db.models import Sum
 from .models import result_data_set
 from advertisers.models import advertiser_info
-from rest_framework.decorators import api_view
+
 from datetime import datetime
 from django.http import JsonResponse
 

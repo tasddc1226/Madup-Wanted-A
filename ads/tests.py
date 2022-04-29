@@ -1,7 +1,6 @@
 import json
 
 from django.test import TestCase, Client
-from django.conf import settings
 from datetime import datetime
 
 from ads.models import result_data_set, ad_info
