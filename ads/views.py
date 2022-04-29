@@ -10,7 +10,7 @@ from datetime import datetime
 @api_view(['GET'])
 def analysis_detail(request):
 
-    advertiser_id = request.GET.get('advertiser', None)
+    advertiser_id = request.GET.get('advertiser_id', None)
     
     # 광고주id의 존재여부, 입력일자의 에러 확인
     date_format = '%Y.%M.%d'
@@ -39,7 +39,7 @@ def analysis_detail(request):
         data = datas.filter(media=kind)
         total = data.aggregate(
             total_click = Sum('click'),
-            total_impresson = Sum('impression'),
+            total_impression = Sum('impression'),
             total_cost = Sum('cost'),
             total_conversion = Sum('conversion'),
             total_cv = Sum('cv'),
@@ -51,7 +51,7 @@ def analysis_detail(request):
             'cvr': round(total['total_conversion'] * 100 / total['total_click'], 2),
             'cpa': round(total['total_cost'] * 100 / total['total_conversion'], 2),
         }
-        analysis_datas_set[f'{kind}'] = total
+        analysis_datas_set[f'{kind}'] = analysis_datas
 
     return Response(analysis_datas_set, status=200)
     
