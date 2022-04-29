@@ -16,9 +16,11 @@ def analysis_detail(request):
     
     # 입력기간 예외 처리
     try:
-        date_format = '%Y.%M.%d'
+        date_format = '%Y.%m.%d'
         start_date = datetime.strptime(request.GET.get('start_date', None), date_format)
         end_date = datetime.strptime(request.GET.get('end_date', None), date_format)
+        start_date = start_date.date()
+        end_date = end_date.date()
     except:
         return JsonResponse({'message':'조회 날짜가 비어있거나 입력 형식이 잘못되었습니다. 일자입력형식은 YYYY.MM.DD입니다.'}, status=404)
 

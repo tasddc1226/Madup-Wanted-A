@@ -6,7 +6,6 @@ from datetime import datetime
 from ads.models import result_data_set, ad_info
 from advertisers.models import advertiser_info
 
-TestCase.maxDiff = None
 # 양수영
 # 광고 효율 데이터 테스트
 class GetAdsResultTest(TestCase):
@@ -27,7 +26,7 @@ class GetAdsResultTest(TestCase):
             advertiser_id = '37443400',
             uid_id = 'ad_cmp-a001-04-000000000684573',
             media = 'naver',
-            date = datetime.strptime('2022.01.01','%Y.%M.%d'),
+            date = datetime.strptime('2022.01.01','%Y.%m.%d'),
             cost = '49900',
             impression = 244,
             click = '47',
@@ -39,7 +38,7 @@ class GetAdsResultTest(TestCase):
             advertiser_id = '37443400',
             uid_id = 'ad_cmp-a001-04-000000000684573',
             media = 'naver',
-            date = datetime.strptime('2022.01.02', '%Y.%M.%d'),
+            date = datetime.strptime('2022.01.02', '%Y.%m.%d'),
             cost = '49900',
             impression = 434,
             click = '68',
@@ -58,15 +57,14 @@ class GetAdsResultTest(TestCase):
                 "message": "SUCCESS",
                 "analysis_datas": {
                     "naver": {
-                        "ctr": 18.89,
-                        "roas": 403.89,
-                        "cpc": 72109.83,
-                        "cvr": 6.94,
-                        "cpa": 1039583.33
+                        "ctr": 16.96,
+                        "roas": 163.13,
+                        "cpc": 86782.61,
+                        "cvr": 3.48,
+                        "cpa": 2495000.0
                     }
                 }
             }
         )
         self.assertEqual(response.status_code, 200)
-
 
