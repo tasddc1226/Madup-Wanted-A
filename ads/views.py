@@ -19,8 +19,6 @@ def analysis_detail(request):
         date_format = '%Y.%m.%d'
         start_date = datetime.strptime(request.GET.get('start_date', None), date_format)
         end_date = datetime.strptime(request.GET.get('end_date', None), date_format)
-        start_date = start_date.date()
-        end_date = end_date.date()
     except:
         return JsonResponse({'message':'조회 날짜가 비어있거나 입력 형식이 잘못되었습니다. 일자입력형식은 YYYY.MM.DD입니다.'}, status=404)
 
@@ -48,12 +46,13 @@ def analysis_detail(request):
             total_conversion = Sum('conversion'),
             total_cv = Sum('cv'),
         )
+        # 양수영
         analysis_datas = {
-            'ctr': round(total['total_click'] * 100 / total['total_impression'], 2),
-            'roas': round(total['total_cv'] * 100 / total['total_cost'], 2),
-            'cpc': round(total['total_cost'] * 100 / total['total_click'], 2),
-            'cvr': round(total['total_conversion'] * 100 / total['total_click'], 2),
-            'cpa': round(total['total_cost'] * 100 / total['total_conversion'], 2),
+            'ctr': 0 if total['total_impression'] == 0 else round(total['total_click'] * 100 / total['total_impression'], 2),
+            'roas': 0 if total['total_cost'] == 0 else round(total['total_cv'] * 100 / total['total_cost'], 2),
+            'cpc': 0 if total['total_click'] == 0 else round(total['total_cost'] * 100 / total['total_click'], 2),
+            'cvr': 0 if total['total_click'] == 0 else round(total['total_conversion'] * 100 / total['total_click'], 2),
+            'cpa': 0 if total['total_conversion'] == 0 else round(total['total_cost'] * 100 / total['total_conversion'], 2),
         }
         analysis_datas_set[f'{kind}'] = analysis_datas
 
