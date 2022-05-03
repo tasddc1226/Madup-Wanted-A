@@ -32,8 +32,8 @@ def analysis_detail(request):
     # 검색된 결과에서 media(매체)의 종류를 뽑아내기
     media_kind = datas.values_list('media', flat=True).distinct()
     media_kind_list = []
-    for i in range(media_kind.count()):
-        media_kind_list.append(media_kind[i])
+    for media in media_kind:
+        media_kind_list.append(media)
 
     # 매체별로 filtering하여 각각 계산된 분석자료를 사전에 입력
     analysis_datas_set = {}
